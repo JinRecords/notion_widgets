@@ -20,6 +20,7 @@
 			padding: 0;
 			-webkit-box-sizing: border-box;
 			box-sizing: border-box;
+
 		}
 
 
@@ -32,9 +33,9 @@
 		}
 
 		.navMenu a {
-			color: #272727;
+			color: #ffffff;
 			text-decoration: none;
-			text-transform: uppercase;
+			text-transfrm: uppercase;
 			display: inline-block;
 			padding: 6px;
 		}
@@ -44,13 +45,17 @@
 		}
 
 		.border {
-			border: 1px solid #cccccc;
+			border: 1px solid #ffffff;
 
 		}
 
 		.navMenu a:hover {
 
 			color: #d09c0b;
+		}
+
+		.fa-solid {
+			color: #ffffff;
 		}
 	</style>
 </head>
@@ -59,17 +64,15 @@
 
 	<nav class="navMenu  border">
 		<a id="home" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-house"></i> Home</a>
-		<a id="inbox" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-inbox"></i> Inbox</a>
-		<a id="week" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-calendar-week"></i> Planner</a>
-		<a id="projects" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-briefcase"></i> Projects</a>
-		<a id="tasks" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-list-check"></i> Tasks</a>
-		<a id="business" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-money-bill-wave"></i> Business</a>
-		<a id="knowledge" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-lightbulb"></i> Knowledge</a>
-		<a id="topics" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-layer-group"></i> Topics</a>
+		<a id="attendance" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-sign-in"></i> Attendance</a>
+		<a id="tasks" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-tasks"></i> Tasks </a>
+		<a id="report" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-paper-plane"></i> Report</a>
+		<a id="finance" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-credit-card-alt"></i> Finance</a>
 		<a id="notes" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-book"></i> Notes</a>
-		<a id="media" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-bookmark"></i> Media</a>
-		<a id="resourses" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-wrench"></i> Resourses</a>
-		<a id="lifewiki" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-heart"></i> Lifewiki</a>
+		<a id="stock" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-line-chart"></i> Stock</a>
+		<a id="sop" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-bookmark"></i> SOP</a>
+		<a id="handbook" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-balance-scale"></i> handbook</a>
+		<a id="hierarchy" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-users"></i>Hierarchy </a>
 
 
 
@@ -87,31 +90,25 @@
 		function navigate(id) {
 
 			if (id == 'home')
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "inbox")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "week")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "month")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "projects")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "business")
-				window.open("https://example.com", '_blank').focus();
+				window.open("https://www.notion.so/Jin-s-Dashboard-173331501d3b80f29b7fed014c9a575f?pvs=4", '_blank').focus();
+			else if (id == "attendence")
+				window.open("https://www.notion.so/Attendances-152331501d3b81c6b954d61e61a71890?pvs=4", '_blank').focus();
 			else if (id == "tasks")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "knowledge")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "topics")
-				window.open("https://example.com", '_blank').focus();
+				window.open("https://www.notion.so/Tasks-for-today-173331501d3b80f2a62efdaff3b74eb7?pvs=4#173331501d3b8087ae30dbdccd99b467", '_blank').focus();
+			else if (id == "report")
+				window.open("https://www.notion.so/Weekly-Report-16f331501d3b803fba96dcba5a003fb2?pvs=4", '_blank').focus();
+			else if (id == "finance")
+				window.open("https://www.notion.so/Finance-Tracker-173331501d3b80cda549c17b2b5b5780?pvs=4", '_blank').focus();
 			else if (id == "notes")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "media")
-				window.open("https://example.com", '_blank').focus();
-			else if (id == "resourses")
-				window.open("https://example.com3", '_blank').focus();
-			else if (id == "lifewiki")
-				window.open("https://example.com", '_blank').focus();
+				window.open("https://www.notion.so/173331501d3b808291b9c1297e749899?v=173331501d3b81d5bdd1000c9628cf45&pvs=4", '_blank').focus();
+			else if (id == "stock")
+				window.open("https://www.notion.so/Stock-exchange-175331501d3b80789653c98bb748fc51?pvs=4", '_blank').focus();
+			else if (id == "sop")
+				window.open("https://www.notion.so/SOP-165331501d3b804f9dc7ef2f6f481191?pvs=4", '_blank').focus();
+			else if (id == "handbook")
+				window.open("https://www.notion.so/Handbook-158331501d3b80baa38ff919b913d4c3?pvs=4", '_blank').focus();
+			else if (id == "hierarchy")
+				window.open("https://www.notion.so/15a331501d3b80d8b8c4fd04af89ffb2?v=2582e913c9ad4c0faed8399f9ffd21d2&pvs=4", '_blank').focus();
 
 		}
 	</script>
