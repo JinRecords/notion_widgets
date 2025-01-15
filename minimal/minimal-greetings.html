@@ -19,7 +19,7 @@
 
         #waveCanvas {
             position: absolute; /* Position the canvas behind the content */
-            top: 32%;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
@@ -28,8 +28,11 @@
 
         /* Styles for the widget */
         .container {
-            position: relative; /* Ensure widget is positioned relative to the container */
+            position: absolute;
+            top: 0;
             z-index: 1; /* Place the widget above the canvas */
+            padding-top: 70px;
+
         }
 
         .widget {
@@ -39,12 +42,13 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            max-width: 200%;
-            width: 150vh;
+            max-width: 100%;
+            width: 100vh;
             margin: auto;
             border: 3px solid #ffffff;
             border-radius: 5px;
             box-shadow: 2px 2px 1px 0px #000000;
+
         }
 
         .greet {
@@ -214,7 +218,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             smoothMouseX += (mouseX - smoothMouseX) * mouseSmoothing;
-            smoothMouseY += (mouseY - smoothMouseY) * mouseSmoothing-7;
+            smoothMouseY += (mouseY - smoothMouseY) * mouseSmoothing;
 
             // Add the current mouse position to the history
             mouseHistory.push({ x: smoothMouseX, y: smoothMouseY });

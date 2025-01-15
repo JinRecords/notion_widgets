@@ -18,7 +18,7 @@
 
         #waveCanvas {
             position: absolute; /* Position the canvas behind the content */
-            top: 32%;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
@@ -37,18 +37,22 @@
 
         /* Styles for the quote widget */
         .container {
+            position: absolute; /* Position the canvas behind the content */
+            top: 0;
             position: relative; /* Ensure widget is positioned relative to the container */
             z-index: 1; /* Place the widget above the canvas */
+
         }
 
         .widget {
-            padding: 5px 5px;
+            padding: 50px 5px;
             color: #ffffff;
             text-align: center;
             max-width: 95%;
             margin: auto;
             font-variant-caps: petite-caps;
             font-size: 2em;
+
         }
 
         .widget-box {
@@ -133,7 +137,7 @@
 
         let time = 0;
         const speed = 0.005;
-        const lineCount = 30;
+        const lineCount = 40;
         const lineSpacing = 10;
         const frequency = 0.008;
         const amplitude = 35;
@@ -188,7 +192,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             smoothMouseX += (mouseX - smoothMouseX) * mouseSmoothing;
-            smoothMouseY += (mouseY - smoothMouseY) * mouseSmoothing -7;
+            smoothMouseY += (mouseY - smoothMouseY) * mouseSmoothing;
 
             mouseHistory.push({ x: smoothMouseX, y: smoothMouseY });
             if (mouseHistory.length > maxHistory) {
