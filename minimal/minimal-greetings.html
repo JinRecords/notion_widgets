@@ -19,7 +19,7 @@
 
         #waveCanvas {
             position: absolute; /* Position the canvas behind the content */
-            top: 0;
+            top: 32%;
             left: 0;
             width: 100%;
             height: 100%;
@@ -157,7 +157,7 @@
 
         let time = 0;
         const speed = 0.005;
-        const lineCount = 100;
+        const lineCount = 30;
         const lineSpacing = 10;
         const frequency = 0.008;
         const amplitude = 35;
@@ -214,7 +214,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             smoothMouseX += (mouseX - smoothMouseX) * mouseSmoothing;
-            smoothMouseY += (mouseY - smoothMouseY) * mouseSmoothing;
+            smoothMouseY += (mouseY - smoothMouseY) * mouseSmoothing-7;
 
             // Add the current mouse position to the history
             mouseHistory.push({ x: smoothMouseX, y: smoothMouseY });
