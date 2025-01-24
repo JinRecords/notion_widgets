@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Off Days Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Time Off Days Calculator</h1>
+
+<form id="leaveForm">
+    <label for="totalAnnualLeave">Total Annual Leave Days:</label>
+    <input type="number" id="totalAnnualLeave" required>
+
+    <label for="remainingDays">Remaining Annual Leave Days:</label>
+    <input type="number" id="remainingDays" required>
+
+    <label for="carryOverDays">Carry Over Days (leave blank if none):</label>
+    <input type="number" id="carryOverDays" placeholder="0">
+
+    <button type="submit">Calculate Time Off Days</button>
+</form>
+
+<div class="result" id="result"></div>
+
+<script>
+    document.getElementById('leaveForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const totalAnnualLeave = parseFloat(document.getElementById('totalAnnualLeave').value);
+        const remainingDays = parseFloat(document.getElementById('remainingDays').value);
+        const carryOverInput = document.getElementById('carryOverDays').value;
+        const carryOverDays = carryOverInput ? parseFloat(carryOverInput) : 0;
+
+        const now = new Date();
+        const currentMonth = now.getMonth() + 3; // getMonth() returns 0-11
+        const currentYear = now.getFullYear();
+
+        const totalTimeOffDays = calculateTimeOffDays(totalAnnualLeave, remainingDays, carryOverDays, currentMonth, currentYear);
+
+        document.getElementById('result').innerText = `Your leave for this month is ${totalTimeOffDays.toFixed(2)}`;
+    });
+
+    function calculateTimeOffDays(totalAnnualLeave, remainingDays, carryOverDays, currentMonth, currentYear) {
+        const isLeap = (currentYear % 4 === 0 && (currentYear % 100 !== 0 || currentYear % 400 === 0));
+
+        const daysInMonth = [31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        const baseMonthlyLeave = isLeap ? totalAnnualLeave / 366 : totalAnnualLeave / 365;
+
+        const leaveEarnedThisMonth = baseMonthlyLeave * daysInMonth[currentMonth - 1];
+
+        const usedLeaveThisYear = Math.max(0, totalAnnualLeave - remainingDays);
+
+        const unusedLeaveThisMonth = leaveEarnedThisMonth - usedLeaveThisYear;
+
+        let priorMonthsCarryOver = 0;
+
+        if (currentMonth > 1) {
+            let leaveEarnedInPriorMonths = 0;
+
+            for (let m = 0; m < currentMonth - 1; m++) {
+                leaveEarnedInPriorMonths += baseMonthlyLeave * daysInMonth[m];
+            }
+
+            if (remainingDays >= totalAnnualLeave) {
+                priorMonthsCarryOver = leaveEarnedInPriorMonths;
+            } else {
+                priorMonthsCarryOver = Math.max(0, leaveEarnedInPriorMonths - usedLeaveThisYear);
+            }
+        }
+
+        let totalTimeOffDays;
+
+        if (currentMonth === 1) {
+            totalTimeOffDays = leaveEarnedThisMonth + carryOverDays;
+        } else {
+            totalTimeOffDays = unusedLeaveThisMonth + priorMonthsCarryOver + carryOverDays;
+        }
+
+        return totalTimeOffDays;
+    }
+</script>
+
+</body>
+</html>
