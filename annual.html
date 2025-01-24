@@ -60,7 +60,7 @@
         const carryOverDays = carryOverInput ? parseFloat(carryOverInput) : 0;
 
         const now = new Date();
-        const currentMonth = now.getMonth() + 3; // getMonth() returns 0-11
+        const currentMonth = now.getMonth() + 1; // getMonth() returns 0-11
         const currentYear = now.getFullYear();
 
         const totalTimeOffDays = calculateTimeOffDays(totalAnnualLeave, remainingDays, carryOverDays, currentMonth, currentYear);
