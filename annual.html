@@ -40,17 +40,17 @@
     <label for="totalAnnualLeave">Total Annual Leave Days:</label>
     <input type="number" id="totalAnnualLeave" required>
 
-    <br><br> <!-- Add line breaks for spacing -->
+    <br><br>
 
     <label for="remainingDays">Remaining Annual Leave Days:</label>
     <input type="number" id="remainingDays" required>
 
-    <br><br> <!-- Add line breaks for spacing -->
+    <br><br>
 
     <label for="carryOverDays">Carry Over Days (leave blank if none):</label>
-    <input type="number" id="carryOverDays" placeholder="0">
+    <input type="number" id="carryOverDays" placeholder="0" step="0.1">
 
-    <br><br> <!-- Add line breaks for spacing -->
+    <br><br>
 
     <button type="submit">Calculate Time Off Days</button>
 </form>
@@ -67,12 +67,12 @@
         const carryOverDays = carryOverInput ? parseFloat(carryOverInput) : 0;
 
         const now = new Date();
-        const currentMonth = now.getMonth() + 1; // getMonth() returns 0-11
+        const currentMonth = now.getMonth() + 1;
         const currentYear = now.getFullYear();
 
         const totalTimeOffDays = calculateTimeOffDays(totalAnnualLeave, remainingDays, carryOverDays, currentMonth, currentYear);
 
-        document.getElementById('result').innerText = `Your leave for this month is ${totalTimeOffDays.toFixed(2)}`;
+        document.getElementById('result').innerText = `Your leave for this month is ${totalTimeOffDays.toFixed(1)}`;
     });
 
     function calculateTimeOffDays(totalAnnualLeave, remainingDays, carryOverDays, currentMonth, currentYear) {
