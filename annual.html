@@ -35,6 +35,7 @@
 <body>
 
 <h1>Time Off Days Calculator</h1>
+<h2 id="currentMonthDisplay"></h2>
 
 <form id="leaveForm">
     <label for="totalAnnualLeave">Total Annual Leave Days:</label>
@@ -43,7 +44,7 @@
     <br><br>
 
     <label for="remainingDays">Remaining Annual Leave Days:</label>
-    <input type="number" id="remainingDays" required>
+    <input type="number" id="remainingDays" step="0.1" required>
 
     <br><br>
 
@@ -69,6 +70,9 @@
         const now = new Date();
         const currentMonth = now.getMonth() + 1;
         const currentYear = now.getFullYear();
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        document.getElementById('currentMonthDisplay').innerText = `The current month is: ${monthNames[currentMonth - 1]}`;
 
         const totalTimeOffDays = calculateTimeOffDays(totalAnnualLeave, remainingDays, carryOverDays, currentMonth, currentYear);
 
@@ -77,43 +81,25 @@
 
     function calculateTimeOffDays(totalAnnualLeave, remainingDays, carryOverDays, currentMonth, currentYear) {
         const isLeap = (currentYear % 4 === 0 && (currentYear % 100 !== 0 || currentYear % 400 === 0));
-
         const daysInMonth = [31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        const baseMonthlyLeave = totalAnnualLeave / 12;
 
-        const baseMonthlyLeave = isLeap ? totalAnnualLeave / 366 : totalAnnualLeave / 365;
-
-        const leaveEarnedThisMonth = baseMonthlyLeave * daysInMonth[currentMonth - 1];
-
-        const usedLeaveThisYear = Math.max(0, totalAnnualLeave - remainingDays);
-
-        const unusedLeaveThisMonth = leaveEarnedThisMonth - usedLeaveThisYear;
-
-        let priorMonthsCarryOver = 0;
-
-        if (currentMonth > 1) {
-            let leaveEarnedInPriorMonths = 0;
-
-            for (let m = 0; m < currentMonth - 1; m++) {
-                leaveEarnedInPriorMonths += baseMonthlyLeave * daysInMonth[m];
-            }
-
-            if (remainingDays >= totalAnnualLeave) {
-                priorMonthsCarryOver = leaveEarnedInPriorMonths;
-            } else {
-                priorMonthsCarryOver = Math.max(0, leaveEarnedInPriorMonths - usedLeaveThisYear);
-            }
+        let accumulatedLeave = 0;
+        for (let m = 0; m < currentMonth; m++) {
+            accumulatedLeave += baseMonthlyLeave;
         }
 
-        let totalTimeOffDays;
+        let usedLeave = totalAnnualLeave - remainingDays;
+        let availableLeave = accumulatedLeave - usedLeave;
 
-        if (currentMonth === 1) {
-            totalTimeOffDays = leaveEarnedThisMonth + carryOverDays;
-        } else {
-            totalTimeOffDays = unusedLeaveThisMonth + priorMonthsCarryOver + carryOverDays;
-        }
-
-        return totalTimeOffDays;
+        return Math.max(0, availableLeave + carryOverDays);
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const now = new Date();
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        document.getElementById('currentMonthDisplay').innerText = `The current month is: ${monthNames[now.getMonth()]}`;
+    });
 </script>
 
 </body>
